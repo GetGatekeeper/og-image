@@ -20,7 +20,14 @@ function getCss(theme: string, fontSize: string) {
         background = 'black';
         foreground = 'white';
         radial = 'dimgray';
+    } 
+    
+    if(theme === 'gatekeeper') {
+        background = '#034f84';
+        foreground = 'white';
+        radial = 'dimgray';
     }
+
     return `
     @font-face {
         font-family: 'Inter';

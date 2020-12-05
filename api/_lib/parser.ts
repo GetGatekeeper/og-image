@@ -26,10 +26,19 @@ export function parseRequest(req: IncomingMessage) {
         text = arr.join('.');
     }
 
+    var selectedTheme : Theme;
+    if(theme == 'dark') {
+        selectedTheme = 'dark';
+    } else if(theme == 'light') {
+        selectedTheme = 'light';
+    } else {
+        selectedTheme = 'gatekeeper';
+    }
+
     const parsedRequest: ParsedRequest = {
         fileType: extension === 'jpeg' ? extension : 'png',
         text: decodeURIComponent(text),
-        theme: theme === 'dark' ? 'dark' : 'light',
+        theme: selectedTheme,
         md: md === '1' || md === 'true',
         fontSize: fontSize || '96px',
         images: getArray(images),
@@ -58,7 +67,7 @@ function getDefaultImages(images: string[], theme: Theme): string[] {
     if (!images || !images[0]) {
         return [defaultImage];
     }
-    if (!images[0].startsWith('https://assets.vercel.com/') && !images[0].startsWith('https://assets.zeit.co/')) {
+    if (!images[0].startsWith('https://gatekeeper.page/')) {
         images[0] = defaultImage;
     }
     return images;
